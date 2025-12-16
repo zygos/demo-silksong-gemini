@@ -58,8 +58,9 @@ export class Boss extends Actor {
       this.hp -= amount;
       
       // Juice
-      Juice.flash(this, Color.White, 50);
+      Juice.flash(this, Color.White, 100);
       Juice.hitStop(this.scene!.engine, 20);
+      Juice.spawnDamageText(this.scene!, this.pos.sub(new Vector(0, 40)), amount);
 
       if (this.hp <= this.maxHp / 2 && !this.isEnraged) {
           this.enterEnragedMode();

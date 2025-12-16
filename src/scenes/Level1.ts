@@ -81,7 +81,7 @@ export class Level1 extends Scene {
     this.add(rangedEnemy);
 
     // Create Elite Enemy
-    const elite = new EliteEnemy(vec(700, 450));
+    const elite = new EliteEnemy(vec(600, 450));
     this.add(elite);
 
     // Create Spikes
@@ -131,7 +131,7 @@ export class Level1 extends Scene {
     this.add(leftWall);
 
     // Door to Level 2
-    const door = new Door(vec(750, 490), 'level2', vec(100, 490));
+    const door = new Door(vec(700, 490), 'level2', vec(100, 490));
     this.add(door);
 
     // Camera follow

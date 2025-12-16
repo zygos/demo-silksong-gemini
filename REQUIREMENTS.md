@@ -51,7 +51,7 @@
     - [x] Hazards (spikes, pits).
 - [ ] **Room System:**
     - [x] Doors/Gateways.
-    - [ ] Camera bounds per room.
+    - [x] Camera bounds per room.
     - [ ] Smooth room transitions.
 - [x] **Camera:** Smooth follow.
     - [x] Screen shake.
@@ -66,7 +66,7 @@
 - [ ] **Juice:**
     - [x] Hit flash (white sprite).
     - [x] Light hitstop (freeze frames on impact).
-    - [ ] Particles (blood, sparks).
+    - [x] Particles (blood, sparks).
     - [x] Dash trails.
     - [x] Screen shake.
 - [ ] **Audio:** One exploration track, one boss track, core SFX (jump, hit, dash).

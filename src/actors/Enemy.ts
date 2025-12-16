@@ -1,4 +1,4 @@
-import { Actor, Color, CollisionType, Vector, Engine, ParticleEmitter, EmitterType } from 'excalibur';
+import { Actor, Color, CollisionType, Vector, Engine } from 'excalibur';
 import { Player } from './Player';
 import { Juice } from '../utils/Juice';
 
@@ -43,40 +43,10 @@ export class Enemy extends Actor {
       this.hp -= amount;
       
       // Juice
-      Juice.flash(this, Color.White, 50);
+      Juice.flash(this, Color.White, 100);
       Juice.hitStop(this.scene!.engine, 20);
-
-      // Particles
-      const emitter = new ParticleEmitter({
-        pos: this.pos.clone(),
-        width: 5,
-        height: 5,
-        emitterType: EmitterType.Circle,
-        radius: 5,
-        isEmitting: true,
-        emitRate: 300,
-        particle: {
-            life: 500,
-            minSpeed: 100,
-            maxSpeed: 200,
-            minAngle: 0,
-            maxAngle: 6.2,
-            opacity: 1,
-            fade: true,
-            maxSize: 5,
-            minSize: 1,
-            startSize: 5,
-            endSize: 0,
-            beginColor: Color.Red,
-            endColor: Color.Orange
-        }
-      });
-      this.scene?.add(emitter);
-      setTimeout(() => {
-          emitter.isEmitting = false;
-          emitter.kill(); 
-      }, 100);
-
+      Juice.spawnParticles(this.scene!, this.pos, Color.Orange);
+      Juice.spawnDamageText(this.scene!, this.pos.sub(new Vector(0, 20)), amount);
 
       if (this.hp <= 0) {
           Juice.screenShake(this.scene!, 2, 100); // Small shake on death

@@ -35,7 +35,8 @@ export class Player extends Actor {
       width: Config.Player.Width,
       height: Config.Player.Height,
       color: Color.fromHex(Config.Player.Color),
-      collisionType: CollisionType.Active
+      collisionType: CollisionType.Active,
+      name: 'Player'
     });
   }
 
@@ -234,6 +235,7 @@ export class Player extends Actor {
       // Juice
       Juice.screenShake(this.scene!, 5, 300);
       Juice.hitStop(this.scene!.engine, 50);
+      Juice.spawnParticles(this.scene!, this.pos, Color.White); // "Soul" particles or just white
       
       // Invulnerability Flash
       let flashCount = 0;

@@ -31,12 +31,19 @@ export class Level2 extends Scene {
     this.add(floor);
 
     // Back Door
-    const door = new Door(vec(50, 490), 'level1', vec(700, 490));
+    const door = new Door(vec(100, 490), 'level1', vec(700, 490));
     this.add(door);
 
     // Camera follow
     this.camera.strategy.lockToActor(this.player);
     this.camera.zoom = 1.2;
+
+    // Camera bounds
+    this.camera.strategy.limitCameraBounds(new Actor({
+        pos: vec(400, 300),
+        width: 800,
+        height: 600
+    }).collider.bounds);
   }
 
   onActivate(context: any) {
