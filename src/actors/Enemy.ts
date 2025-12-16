@@ -1,5 +1,6 @@
 import { Actor, Color, CollisionType, Vector, Engine, ParticleEmitter, EmitterType } from 'excalibur';
 import { Player } from './Player';
+import { Juice } from '../utils/Juice';
 
 export class Enemy extends Actor {
   protected hp = 3;
@@ -40,12 +41,10 @@ export class Enemy extends Actor {
 
   public takeDamage(amount: number) {
       this.hp -= amount;
-      // Flash white (simple juice)
-      const originalColor = this.color;
-      this.color = Color.White;
-      setTimeout(() => {
-          this.color = originalColor;
-      }, 50);
+      
+      // Juice
+      Juice.flash(this, Color.White, 50);
+      Juice.hitStop(this.scene!.engine, 20);
 
       // Particles
       const emitter = new ParticleEmitter({
@@ -75,14 +74,12 @@ export class Enemy extends Actor {
       this.scene?.add(emitter);
       setTimeout(() => {
           emitter.isEmitting = false;
-          emitter.kill(); // Should wait for particles to die, but kill removes emitter immediately? 
-          // Excalibur emitters need to be managed. 
-          // Better to just emit a burst.
-          // emitter.emitParticles(10); // If supported
+          emitter.kill(); 
       }, 100);
 
 
       if (this.hp <= 0) {
+          Juice.screenShake(this.scene!, 2, 100); // Small shake on death
           this.kill();
       }
   }

@@ -50,11 +50,11 @@
     - [x] One-way platforms.
     - [x] Hazards (spikes, pits).
 - [ ] **Room System:**
-    - [ ] Doors/Gateways.
+    - [x] Doors/Gateways.
     - [ ] Camera bounds per room.
     - [ ] Smooth room transitions.
 - [x] **Camera:** Smooth follow.
-    - [ ] Screen shake.
+    - [x] Screen shake.
 - [ ] **Optimization:** Object pooling for projectiles and particles.
 
 ## Presentation
@@ -64,11 +64,11 @@
     - [x] Currency counter.
 - [x] **Menus:** Pause menu, End screen.
 - [ ] **Juice:**
-    - [ ] Hit flash (white sprite).
-    - [ ] Light hitstop (freeze frames on impact).
+    - [x] Hit flash (white sprite).
+    - [x] Light hitstop (freeze frames on impact).
     - [ ] Particles (blood, sparks).
     - [x] Dash trails.
-    - [ ] Screen shake.
+    - [x] Screen shake.
 - [ ] **Audio:** One exploration track, one boss track, core SFX (jump, hit, dash).
 
 ## Out of Scope

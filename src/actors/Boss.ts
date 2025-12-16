@@ -1,5 +1,6 @@
 import { Actor, Color, CollisionType, Vector, Engine } from 'excalibur';
 import { Player } from './Player';
+import { Juice } from '../utils/Juice';
 
 enum BossState {
   Idle,
@@ -56,18 +57,17 @@ export class Boss extends Actor {
   public takeDamage(amount: number) {
       this.hp -= amount;
       
-      // Flash
-      const originalColor = this.color;
-      this.color = Color.White;
-      setTimeout(() => {
-          this.color = originalColor;
-      }, 50);
+      // Juice
+      Juice.flash(this, Color.White, 50);
+      Juice.hitStop(this.scene!.engine, 20);
 
       if (this.hp <= this.maxHp / 2 && !this.isEnraged) {
           this.enterEnragedMode();
+          Juice.screenShake(this.scene!, 5, 500); // Shake on enrage
       }
 
       if (this.hp <= 0) {
+          Juice.screenShake(this.scene!, 10, 1000); // Big shake on death
           this.kill();
           console.log("BOSS DEFEATED");
       }

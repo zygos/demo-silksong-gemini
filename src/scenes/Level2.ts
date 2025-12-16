@@ -5,10 +5,12 @@ import { Boss } from '../actors/Boss';
 import { BossHealthBar } from '../ui/BossHealthBar';
 
 export class Level2 extends Scene {
+  private player!: Player;
+
   onInitialize() {
     // Create Player
-    const player = new Player(vec(100, 300));
-    this.add(player);
+    this.player = new Player(vec(100, 300));
+    this.add(this.player);
 
     // Create Boss
     const boss = new Boss(vec(600, 450));
@@ -33,7 +35,14 @@ export class Level2 extends Scene {
     this.add(door);
 
     // Camera follow
-    this.camera.strategy.lockToActor(player);
+    this.camera.strategy.lockToActor(this.player);
     this.camera.zoom = 1.2;
+  }
+
+  onActivate(context: any) {
+      if (context.data && context.data.spawnPos) {
+          this.player.pos = context.data.spawnPos;
+          this.player.vel = vec(0, 0);
+      }
   }
 }

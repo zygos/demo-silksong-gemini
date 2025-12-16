@@ -25,7 +25,7 @@ export class Door extends Actor {
               
               // Transition
               console.log('Transitioning to ' + this.targetScene);
-              engine.goToScene(this.targetScene);
+              engine.goToScene(this.targetScene, { sceneActivationData: { spawnPos: this.targetPos } });
           }
       });
   }

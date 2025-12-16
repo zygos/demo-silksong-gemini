@@ -9,6 +9,8 @@ import { Door } from '../actors/Door';
 import { OneWayPlatform } from '../actors/OneWayPlatform';
 
 export class Level1 extends Scene {
+  private player!: Player;
+
   onInitialize() {
     // Define Map Grid (0 = Empty, 1 = Solid)
     const mapData = [
@@ -63,11 +65,11 @@ export class Level1 extends Scene {
     // I will revert to the manual actors but add a few more platforms.
 
     // Create Player
-    const player = new Player(vec(100, 300));
-    this.add(player);
+    this.player = new Player(vec(100, 300));
+    this.add(this.player);
 
     // Create HUD
-    const hud = new HUD(player);
+    const hud = new HUD(this.player);
     this.add(hud);
 
     // Create Enemy
@@ -133,7 +135,7 @@ export class Level1 extends Scene {
     this.add(door);
 
     // Camera follow
-    this.camera.strategy.lockToActor(player);
+    this.camera.strategy.lockToActor(this.player);
     this.camera.zoom = 1.2;
     
     // Camera bounds
@@ -142,5 +144,12 @@ export class Level1 extends Scene {
         width: 800,
         height: 600
     }).collider.bounds);
+  }
+
+  onActivate(context: any) {
+      if (context.data && context.data.spawnPos) {
+          this.player.pos = context.data.spawnPos;
+          this.player.vel = vec(0, 0);
+      }
   }
 }

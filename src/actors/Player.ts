@@ -10,6 +10,7 @@ import {
 } from 'excalibur';
 import { Config } from '../config';
 import { MeleeAttack } from './MeleeAttack';
+import { Juice } from '../utils/Juice';
 import { Resources } from '../resources';
 
 export class Player extends Actor {
@@ -230,8 +231,11 @@ export class Player extends Actor {
 
       Resources.Hit.play();
 
-      // Flash
-      const originalColor = this.color;
+      // Juice
+      Juice.screenShake(this.scene!, 5, 300);
+      Juice.hitStop(this.scene!.engine, 50);
+      
+      // Invulnerability Flash
       let flashCount = 0;
       const flashInterval = setInterval(() => {
           this.graphics.visible = !this.graphics.visible;
@@ -240,12 +244,8 @@ export class Player extends Actor {
               clearInterval(flashInterval);
               this.graphics.visible = true;
               this.isInvulnerable = false;
-              this.color = originalColor;
           }
       }, 100);
-
-      // Screen Shake
-      this.scene?.camera.shake(5, 5, 300);
       
       if (this.hp <= 0) {
           this.kill();
